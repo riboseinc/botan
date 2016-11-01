@@ -249,8 +249,11 @@ PointGFp multi_exponentiate(const PointGFp& p1, const BigInt& z1,
                             const PointGFp& p2, const BigInt& z2)
    {
    const PointGFp p3 = p1 + p2;
+   const PointGFp zero(p1.get_curve());
 
-   PointGFp H(p1.get_curve()); // create as zero
+   const PointGFp* mul[4] = { &zero, &p1, &p2, &p3 };
+
+   PointGFp H = zero;
    size_t bits_left = std::max(z1.bits(), z2.bits());
 
    std::vector<BigInt> ws(9);
@@ -259,15 +262,10 @@ PointGFp multi_exponentiate(const PointGFp& p1, const BigInt& z1,
       {
       H.mult2(ws);
 
-      const bool z1_b = z1.get_bit(bits_left - 1);
-      const bool z2_b = z2.get_bit(bits_left - 1);
+      const uint8_t z1_b = z1.get_bit(bits_left - 1);
+      const uint8_t z2_b = z2.get_bit(bits_left - 1);
 
-      if(z1_b == true && z2_b == true)
-         H.add(p3, ws);
-      else if(z1_b)
-         H.add(p1, ws);
-      else if(z2_b)
-         H.add(p2, ws);
+      H.add(*mul[z1_b + 2 * z2_b], ws);
 
       --bits_left;
       }
