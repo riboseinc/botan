@@ -18,7 +18,7 @@ namespace Botan {
 *
 * Currently this class supports only x86 (via CPUID) and PowerPC (AltiVec detection)
 */
-class BOTAN_DLL CPUID
+class BOTAN_PUBLIC_API(2,0) CPUID
    {
    public:
       /**

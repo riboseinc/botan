@@ -18,7 +18,7 @@ namespace Botan {
 /**
 * A GnuTLS compatible SRP6 authenticator file
 */
-class BOTAN_DLL SRP6_Authenticator_File
+class BOTAN_PUBLIC_API(2,0) SRP6_Authenticator_File
    {
    public:
 

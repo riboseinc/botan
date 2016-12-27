@@ -44,7 +44,7 @@ std::vector<uint8_t> make_hello_random(RandomNumberGenerator& rng,
 /**
 * DTLS Hello Verify Request
 */
-class BOTAN_DLL Hello_Verify_Request final : public Handshake_Message
+class BOTAN_UNSTABLE_API Hello_Verify_Request final : public Handshake_Message
    {
    public:
       std::vector<uint8_t> serialize() const override;
@@ -64,7 +64,7 @@ class BOTAN_DLL Hello_Verify_Request final : public Handshake_Message
 /**
 * Client Hello Message
 */
-class BOTAN_DLL Client_Hello final : public Handshake_Message
+class BOTAN_UNSTABLE_API Client_Hello final : public Handshake_Message
    {
    public:
       class Settings
@@ -252,7 +252,7 @@ class BOTAN_DLL Client_Hello final : public Handshake_Message
 /**
 * Server Hello Message
 */
-class BOTAN_DLL Server_Hello final : public Handshake_Message
+class BOTAN_UNSTABLE_API Server_Hello final : public Handshake_Message
    {
    public:
       class Settings
@@ -505,7 +505,7 @@ class Certificate_Req final : public Handshake_Message
 /**
 * Certificate Verify Message
 */
-class BOTAN_DLL Certificate_Verify final : public Handshake_Message
+class BOTAN_UNSTABLE_API Certificate_Verify final : public Handshake_Message
    {
    public:
       Handshake_Type type() const override { return CERTIFICATE_VERIFY; }
@@ -564,7 +564,7 @@ class Finished final : public Handshake_Message
 /**
 * Hello Request Message
 */
-class BOTAN_DLL Hello_Request final : public Handshake_Message
+class BOTAN_UNSTABLE_API Hello_Request final : public Handshake_Message
    {
    public:
       Handshake_Type type() const override { return HELLO_REQUEST; }
@@ -660,7 +660,7 @@ class Server_Hello_Done final : public Handshake_Message
 /**
 * New Session Ticket Message
 */
-class BOTAN_DLL New_Session_Ticket final : public Handshake_Message
+class BOTAN_UNSTABLE_API New_Session_Ticket final : public Handshake_Message
    {
    public:
       Handshake_Type type() const override { return NEW_SESSION_TICKET; }

@@ -17,7 +17,7 @@ namespace Botan {
 /**
 * SHA-3
 */
-class BOTAN_DLL SHA_3 : public HashFunction
+class BOTAN_PUBLIC_API(2,0) SHA_3 : public HashFunction
    {
    public:
 
@@ -76,7 +76,7 @@ class BOTAN_DLL SHA_3 : public HashFunction
 /**
 * SHA-3-224
 */
-class BOTAN_DLL SHA_3_224 final : public SHA_3
+class BOTAN_PUBLIC_API(2,0) SHA_3_224 final : public SHA_3
    {
    public:
       SHA_3_224() : SHA_3(224) {}
@@ -85,7 +85,7 @@ class BOTAN_DLL SHA_3_224 final : public SHA_3
 /**
 * SHA-3-256
 */
-class BOTAN_DLL SHA_3_256 final : public SHA_3
+class BOTAN_PUBLIC_API(2,0) SHA_3_256 final : public SHA_3
    {
    public:
       SHA_3_256() : SHA_3(256) {}
@@ -94,7 +94,7 @@ class BOTAN_DLL SHA_3_256 final : public SHA_3
 /**
 * SHA-3-384
 */
-class BOTAN_DLL SHA_3_384 final : public SHA_3
+class BOTAN_PUBLIC_API(2,0) SHA_3_384 final : public SHA_3
    {
    public:
       SHA_3_384() : SHA_3(384) {}
@@ -103,7 +103,7 @@ class BOTAN_DLL SHA_3_384 final : public SHA_3
 /**
 * SHA-3-512
 */
-class BOTAN_DLL SHA_3_512 final : public SHA_3
+class BOTAN_PUBLIC_API(2,0) SHA_3_512 final : public SHA_3
    {
    public:
       SHA_3_512() : SHA_3(512) {}

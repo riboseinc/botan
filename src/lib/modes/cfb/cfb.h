@@ -17,7 +17,7 @@ namespace Botan {
 /**
 * CFB Mode
 */
-class BOTAN_DLL CFB_Mode : public Cipher_Mode
+class BOTAN_PUBLIC_API(2,0) CFB_Mode : public Cipher_Mode
    {
    public:
       std::string name() const override;
@@ -61,7 +61,7 @@ class BOTAN_DLL CFB_Mode : public Cipher_Mode
 /**
 * CFB Encryption
 */
-class BOTAN_DLL CFB_Encryption final : public CFB_Mode
+class BOTAN_PUBLIC_API(2,0) CFB_Encryption final : public CFB_Mode
    {
    public:
       /**
@@ -81,7 +81,7 @@ class BOTAN_DLL CFB_Encryption final : public CFB_Mode
 /**
 * CFB Decryption
 */
-class BOTAN_DLL CFB_Decryption final : public CFB_Mode
+class BOTAN_PUBLIC_API(2,0) CFB_Decryption final : public CFB_Mode
    {
    public:
       /**

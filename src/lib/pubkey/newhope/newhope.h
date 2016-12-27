@@ -55,20 +55,20 @@ enum class Newhope_Mode {
 };
 
 // offer
-void BOTAN_DLL newhope_keygen(uint8_t *send,
+void BOTAN_PUBLIC_API(2,0) newhope_keygen(uint8_t *send,
                               newhope_poly *sk,
                               RandomNumberGenerator& rng,
                               Newhope_Mode = Newhope_Mode::SHA3);
 
 // accept
-void BOTAN_DLL newhope_sharedb(uint8_t *sharedkey,
+void BOTAN_PUBLIC_API(2,0) newhope_sharedb(uint8_t *sharedkey,
                                uint8_t *send,
                                const uint8_t *received,
                                RandomNumberGenerator& rng,
                                Newhope_Mode mode = Newhope_Mode::SHA3);
 
 // finish
-void BOTAN_DLL newhope_shareda(uint8_t *sharedkey,
+void BOTAN_PUBLIC_API(2,0) newhope_shareda(uint8_t *sharedkey,
                                const newhope_poly *ska,
                                const uint8_t *received,
                                Newhope_Mode mode = Newhope_Mode::SHA3);

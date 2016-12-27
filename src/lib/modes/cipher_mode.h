@@ -20,7 +20,7 @@ namespace Botan {
 /**
 * Interface for cipher modes
 */
-class BOTAN_DLL Cipher_Mode
+class BOTAN_PUBLIC_API(2,0) Cipher_Mode
    {
    public:
       virtual ~Cipher_Mode() {}
@@ -216,7 +216,7 @@ enum Cipher_Dir { ENCRYPTION, DECRYPTION };
 * @param algo_spec cipher name
 * @param direction ENCRYPTION or DECRYPTION
 */
-BOTAN_DLL Cipher_Mode* get_cipher_mode(const std::string& algo_spec, Cipher_Dir direction);
+BOTAN_PUBLIC_API(2,0) Cipher_Mode* get_cipher_mode(const std::string& algo_spec, Cipher_Dir direction);
 
 }
 
