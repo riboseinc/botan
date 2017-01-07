@@ -48,4 +48,5 @@ rdrand
 rdseed
 sha
 bmi2
+sha
 </isa_extensions>
