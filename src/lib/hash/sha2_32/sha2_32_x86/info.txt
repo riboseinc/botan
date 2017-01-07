@@ -1,0 +1,3 @@
+define SHA2_32_X86 20170107
+
+need_isa sha,sse4.1
