@@ -2083,12 +2083,15 @@ def detect_compiler_version(ccinfo, cc_bin):
         return None
 
     (flags, version_re_str) = cc_version_flag[ccinfo.basename]
-    cc_cmd = [cc_bin, ' '] + flags
+    cc_cmd = cc_bin.split(' ') + [flags]
 
     try:
         version = re.compile(version_re_str)
-        print(version_re_str)
-        cc_output = subprocess.Popen(cc_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True).communicate()
+
+        cc_output = subprocess.Popen(cc_cmd,
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE,
+                                     universal_newlines=True).communicate()
 
         cc_output = str(cc_output)
 
