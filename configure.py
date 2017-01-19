@@ -2083,7 +2083,7 @@ def detect_compiler_version(ccinfo, cc_bin):
         return None
 
     (flags, version_re_str) = cc_version_flag[ccinfo.basename]
-    cc_cmd = cc_bin.split(' ') + [flags]
+    cc_cmd = cc_bin.split(' ') + flags
 
     try:
         version = re.compile(version_re_str)
