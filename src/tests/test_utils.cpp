@@ -10,6 +10,7 @@
 #include <botan/loadstor.h>
 #include <botan/calendar.h>
 #include <botan/internal/rounding.h>
+#include <botan/internal/ct_utils.h>
 #include <botan/charset.h>
 
 #if defined(BOTAN_HAS_BASE64_CODEC)
@@ -61,8 +62,67 @@ class Utility_Function_Tests : public Text_Based_Test
          std::vector<Test::Result> results;
 
          results.push_back(test_loadstore());
+         results.push_back(test_ct_utils());
 
          return results;
+         }
+
+      Test::Result test_ct_utils()
+         {
+         Test::Result result("CT utils");
+
+         result.test_eq_sz("CT::is_zero8", Botan::CT::is_zero<uint8_t>(0), 0xFF);
+         result.test_eq_sz("CT::is_zero8", Botan::CT::is_zero<uint8_t>(1), 0x00);
+         result.test_eq_sz("CT::is_zero8", Botan::CT::is_zero<uint8_t>(0xFF), 0x00);
+
+         result.test_eq_sz("CT::is_zero16", Botan::CT::is_zero<uint16_t>(0), 0xFFFF);
+         result.test_eq_sz("CT::is_zero16", Botan::CT::is_zero<uint16_t>(1), 0x0000);
+         result.test_eq_sz("CT::is_zero16", Botan::CT::is_zero<uint16_t>(0xFF), 0x0000);
+
+         result.test_eq_sz("CT::is_zero32", Botan::CT::is_zero<uint32_t>(0), 0xFFFFFFFF);
+         result.test_eq_sz("CT::is_zero32", Botan::CT::is_zero<uint32_t>(1), 0x00000000);
+         result.test_eq_sz("CT::is_zero32", Botan::CT::is_zero<uint32_t>(0xFF), 0x00000000);
+
+         result.test_eq_sz("CT::min8", Botan::CT::min<uint8_t>(0, 1), 0);
+         result.test_eq_sz("CT::min8", Botan::CT::min<uint8_t>(1, 0), 0);
+         result.test_eq_sz("CT::min8", Botan::CT::min<uint8_t>(0xFE, 5), 5);
+         result.test_eq_sz("CT::min8", Botan::CT::min<uint8_t>(5, 0xFE), 5);
+         result.test_eq_sz("CT::min8", Botan::CT::min<uint8_t>(10, 5), 5);
+         result.test_eq_sz("CT::min8", Botan::CT::min<uint8_t>(5, 10), 5);
+
+         result.test_eq_sz("CT::min16", Botan::CT::min<uint16_t>(0, 1), 0);
+         result.test_eq_sz("CT::min16", Botan::CT::min<uint16_t>(1, 0), 0);
+         result.test_eq_sz("CT::min16", Botan::CT::min<uint16_t>(0xFFFF, 5), 5);
+
+         result.test_eq_sz("CT::min32", Botan::CT::min<uint32_t>(0, 1), 0);
+         result.test_eq_sz("CT::min32", Botan::CT::min<uint32_t>(1, 0), 0);
+         result.test_eq_sz("CT::min32", Botan::CT::min<uint32_t>(0xFFFF, 5), 5);
+
+         result.test_eq_sz("CT::max8", Botan::CT::max<uint8_t>(0, 1), 1);
+         result.test_eq_sz("CT::max8", Botan::CT::max<uint8_t>(1, 0), 1);
+         result.test_eq_sz("CT::max8", Botan::CT::max<uint8_t>(0xF4, 5), 0xF4);
+
+         result.test_eq_sz("CT::max16", Botan::CT::max<uint16_t>(0, 1), 1);
+         result.test_eq_sz("CT::max16", Botan::CT::max<uint16_t>(1, 0), 1);
+         result.test_eq_sz("CT::max16", Botan::CT::max<uint16_t>(0xFFFF, 5), 0xFFFF);
+
+         result.test_eq_sz("CT::max32", Botan::CT::max<uint32_t>(0, 1), 1);
+         result.test_eq_sz("CT::max32", Botan::CT::max<uint32_t>(1, 0), 1);
+         result.test_eq_sz("CT::max32", Botan::CT::max<uint32_t>(0xFFFF5, 5), 0xFFFF5);
+
+         result.test_eq_sz("CT::is_less8", Botan::CT::is_less<uint8_t>(0, 1), 0xFF);
+         result.test_eq_sz("CT::is_less8", Botan::CT::is_less<uint8_t>(1, 0), 0x00);
+         result.test_eq_sz("CT::is_less8", Botan::CT::is_less<uint8_t>(0xFF, 5), 0x00);
+
+         result.test_eq_sz("CT::is_less16", Botan::CT::is_less<uint16_t>(0, 1), 0xFFFF);
+         result.test_eq_sz("CT::is_less16", Botan::CT::is_less<uint16_t>(1, 0), 0x0000);
+         result.test_eq_sz("CT::is_less16", Botan::CT::is_less<uint16_t>(0xFFFF, 5), 0x0000);
+
+         result.test_eq_sz("CT::is_less32", Botan::CT::is_less<uint32_t>(0, 1), 0xFFFFFFFF);
+         result.test_eq_sz("CT::is_less32", Botan::CT::is_less<uint32_t>(1, 0), 0x00000000);
+         result.test_eq_sz("CT::is_less32", Botan::CT::is_less<uint32_t>(0xFFFF5, 5), 0x00000000);
+
+         return result;
          }
 
       Test::Result test_loadstore()

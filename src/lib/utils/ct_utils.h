@@ -119,22 +119,6 @@ inline T is_equal(T x, T y)
    }
 
 template<typename T>
-inline T is_less(T x, T y)
-   {
-   /*
-   This expands to a constant time sequence with GCC 5.2.0 on x86-64
-   but something more complicated may be needed for portable const time.
-   */
-   return expand_mask<T>(x < y);
-   }
-
-template<typename T>
-inline T is_lte(T x, T y)
-   {
-   return expand_mask<T>(x <= y);
-   }
-
-template<typename T>
 inline void conditional_copy_mem(T value,
                                  T* to,
                                  const T* from0,
@@ -173,14 +157,26 @@ template<typename T>
 inline T max(T a, T b)
    {
    const T a_larger = b - a; // negative if a is larger
-   return select(expand_top_bit(a), a, b);
+   return select(expand_top_bit(a_larger), a, b);
    }
 
 template<typename T>
 inline T min(T a, T b)
    {
    const T a_larger = b - a; // negative if a is larger
-   return select(expand_top_bit(b), b, a);
+   return select(expand_top_bit(a_larger), b, a);
+   }
+
+template<typename T>
+inline T is_less(T a, T b)
+   {
+   return expand_top_bit(a ^ ((a^b) | ((a-b)^a)));
+   }
+
+template<typename T>
+inline T is_lte(T a, T b)
+   {
+   return CT::is_less(a, b) | CT::is_equal(a, b);
    }
 
 inline secure_vector<uint8_t> strip_leading_zeros(const uint8_t in[], size_t length)
